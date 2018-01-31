@@ -62,10 +62,11 @@
  * };
  *
  */
+
 $app->group('/api', function () {
     // 首页
     $this->get('/index/index', '\App\Controllers\IndexController:index');
-    $this->get('/category/index', '\App\Controllers\CategoryController:index');
+    $this->get('/catalog/index', '\App\Controllers\CategoryController:index');
     $this->get('/catalog/current', '\App\Controllers\CategoryController:current');
     // 微信登录授权
     $this->get('/auth/loginByWeixin', '\App\Controllers\AuthController:loginByWeixin');
@@ -73,24 +74,24 @@ $app->group('/api', function () {
     $this->get('/goods/count', '\App\Controllers\GoodsController:count');  //统计商品总数
     $this->get('/goods/list', '\App\Controllers\GoodsController:getList');  //获得商品列表
     $this->get('/goods/category', '\App\Controllers\GoodsController:category');  //获得分类数据
-    $this->get('/goods/detail', '');  //获得商品的详情
-    $this->get('/goods/new', '');  //新品
-    $this->get('/goods/hot', '');  //热门
-    $this->get('/goods/related', '');  //商品详情页的关联商品（大家都在看）
+    $this->get('/goods/detail', '\App\Controllers\GoodsController:detail');  //获得商品的详情
+    $this->get('/goods/new', '\App\Controllers\GoodsController:new');  //新品
+    $this->get('/goods/hot', '\App\Controllers\GoodsController:hot');  //热门
+    $this->get('/goods/related', '\App\Controllers\GoodsController:related');  //商品详情页的关联商品（大家都在看）
     // 品牌
-    $this->get('/brand/list', '');  //品牌列表
-    $this->get('/brand/detail', ''); //品牌详情
+    $this->get('/brand/list', '\App\Controllers\BrandController:getList');  //品牌列表
+    $this->get('/brand/detail', '\App\Controllers\BrandController:detail'); //品牌详情
     // 购物车
-    $this->get('/cart/index', ''); //获取购物车的数据
-    $this->get('/cart/add', ''); // 添加商品到购物车
-    $this->get('/cart/update', '');// 更新购物车的商品
-    $this->get('/cart/delete', ''); // 删除购物车的商品
-    $this->get('/cart/checked', ''); // 选择或取消选择商品
-    $this->get('/cart/goodscount', ''); // 获取购物车商品件数
-    $this->get('/cart/checkout', ''); // 下单前信息确认
+    $this->get('/cart/index', '\App\Controllers\CartController:index'); //获取购物车的数据
+    $this->get('/cart/add', '\App\Controllers\CartController:add'); // 添加商品到购物车
+    $this->get('/cart/update', '\App\Controllers\CartController:update');// 更新购物车的商品
+    $this->get('/cart/delete', '\App\Controllers\CartController:delete'); // 删除购物车的商品
+    $this->get('/cart/checked', '\App\Controllers\CartController:checked'); // 选择或取消选择商品
+    $this->get('/cart/goodscount', '\App\Controllers\CartController:goodscount'); // 获取购物车商品件数
+    $this->get('/cart/checkout', '\App\Controllers\CartController:checked'); // 下单前信息确认
     // 订单/支付
-    $this->get('/order/submit', ''); // 提交订单
-    $this->get('/pay/prepay', ''); //获取微信统一下单prepay_id
+    $this->get('/order/submit', '\App\Controllers\OrderController:submit'); // 提交订单
+    $this->get('/pay/prepay', '\App\Controllers\PayController:prepay'); //获取微信统一下单prepay_id
     // 收藏
     $this->get('/collect/list', '\App\Controllers\CollectController:getList');  //收藏列表
     $this->get('/collect/addordelete', '\App\Controllers\CollectController:addordelete');  //添加或取消收藏
@@ -103,24 +104,22 @@ $app->group('/api', function () {
     $this->get('/topic/detail', '\App\Controllers\TopicController:detail'); //专题详情
     $this->get('/topic/related', '\App\Controllers\TopicController:related'); //相关专题
     // 搜索
-    $this->get('/search/index', '');  //搜索页面数据
-    $this->get('/search/result', ''); //搜索数据
-    $this->get('/search/helper', '');  //搜索帮助
-    $this->get('/search/clearhistory', '');  //搜索帮助
+    $this->get('/search/index', '\App\Controllers\SearchController:index');  //搜索页面数据
+    $this->get('/search/result', '\App\Controllers\SearchController:result'); //搜索数据
+    $this->get('/search/helper', '\App\Controllers\SearchController:helper');  //搜索帮助
+    $this->get('/search/clearhistory', '\App\Controllers\SearchController:clearhistory');  //搜索帮助
     // 地址
-    $this->get('/address/list', '');  //收货地址列表
-    $this->get('/address/detail', '');  //收货地址详情
-    $this->get('/address/save', '');  //保存收货地址
-    $this->get('/address/delete', '');  //保存收货地址
+    $this->get('/address/list', '\App\Controllers\AddressController:getList');  //收货地址列表
+    $this->get('/address/detail', '\App\Controllers\AddressController:detail');  //收货地址详情
+    $this->get('/address/save', '\App\Controllers\AddressController:save');  //保存收货地址
+    $this->get('/address/delete', '\App\Controllers\AddressController:delete');  //保存收货地址
     // 区域
-    $this->get('/region/list', '');  //获取区域列表
+    $this->get('/region/list', '\App\Controllers\RegionController:getList');  //获取区域列表
     // 订单
-    $this->get('/order/list', '');  //订单列表
-    $this->get('/order/detail', '');  //订单详情
-    $this->get('/order/cancel', '');  //取消订单
+    $this->get('/order/list', '\App\Controllers\OrderController:getList');  //订单列表
+    $this->get('/order/detail', '\App\Controllers\OrderController:detail');  //订单详情
+    $this->get('/order/cancel', '\App\Controllers\OrderController:cancel');  //取消订单
     // 足记
-    $this->get('/footprint/list', '');  //足迹列表
-    $this->get('/footprint/delete', ''); //删除足迹
-
-
+    $this->get('/footprint/list', '\App\Controllers\FootprintController:getList');  //足迹列表
+    $this->get('/footprint/delete', '\App\Controllers\FootprintController:delete'); //删除足迹
 });
