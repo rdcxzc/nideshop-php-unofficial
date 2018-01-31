@@ -21,11 +21,14 @@ class AuthController extends Controller
             "exp" => $future->getTimeStamp()
         ];
         $secret = getenv("JWT_SECRET");
-        $token = JWT::encode($payload, $secret, "HS256");
+        $token = @JWT::encode($payload, $secret, "HS256");
         $data["token"] = $token;
         $data["expires"] = $future->getTimeStamp();
-        return $response->withStatus(201)
-            ->withHeader("Content-Type", "application/json")
-            ->write(json_encode($data, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
+
+        return $this->api_r('0','',201,$data,$response);
+
+//        return $response->withStatus(201)
+//            ->withHeader("Content-Type", "application/json")
+//            ->write(json_encode($data, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
     }
 }

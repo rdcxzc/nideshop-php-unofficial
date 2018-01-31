@@ -34,7 +34,19 @@ class Controller
             $data = json_encode($data);
         }
         return $response->withHeader('Content-Type','application/json')->write($data);
-
-
+    }
+    protected function api_r($code = '0',$msg = '',$status = '200',$data,$response)
+    {
+        if(is_array($data)){
+            $return_data = [
+                'errno'  => $code,
+                'errmsg' => $msg,
+                'data'   => $data
+            ];
+        }
+        return $response
+            ->withStatus($status)
+            ->withHeader('Content-Type','application/json;charset=utf-8')
+            ->withJson($return_data);
     }
 }
