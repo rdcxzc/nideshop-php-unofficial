@@ -31,4 +31,10 @@ class AuthController extends Controller
 //            ->withHeader("Content-Type", "application/json")
 //            ->write(json_encode($data, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
     }
+
+    public function getUserLogin()
+    {
+        print_r(getenv());
+
+    }
 }

@@ -2,4 +2,5 @@
 /runtime/*
 !/runtime/README.md
 composer.lock
-
+/tests/
+/.idea/
