@@ -15,10 +15,12 @@ use Slim\Http\Response;
 class Controller
 {
     protected $container;
+    private $response;
 
     public function __construct($container)
     {
         $this->container = $container;
+        $this->response = Response::class;
     }
 
     public function __get($property)
@@ -35,18 +37,28 @@ class Controller
         }
         return $response->withHeader('Content-Type','application/json')->write($data);
     }
-    protected function api_r($code = '0',$msg = '',$status = '200',$data,$response)
+    protected function api_r($code = '0',$msg = '',$status = '200',$data = NULL,$response)
     {
+        $return_data = [
+            'errno'  => $code,
+            'errmsg' => $msg
+        ];
         if(is_array($data)){
-            $return_data = [
-                'errno'  => $code,
-                'errmsg' => $msg,
-                'data'   => $data
-            ];
+            $return_data['data']  = $data;
         }
         return $response
             ->withStatus($status)
             ->withHeader('Content-Type','application/json;charset=utf-8')
             ->withJson($return_data);
     }
+
+//    protected function fail($msg = '')
+//    {
+//
+//        return $this->response
+//            ->withStatus($status)
+//            ->withHeader('Content-Type','application/json;charset=utf-8')
+//            ->withJson(['errno' => '',]);
+//
+//    }
 }

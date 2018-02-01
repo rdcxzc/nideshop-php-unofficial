@@ -9,3 +9,4 @@ tests
 /runtime/README.md
 /runtime/app.log
 /LICENSE
+/.env

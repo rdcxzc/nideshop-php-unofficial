@@ -1,23 +1,18 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Administrator
- * Date: 2018/1/30
- * Time: 9:27
- */
 namespace App\Extend;
 
 class Token
 {
+
     public $decoded;
+    public $token;
 
     public function populate($decoded)
     {
         $this->decoded = $decoded;
     }
-
-    public function hasScope(array $scope)
+    public function putToken($token)
     {
-        return !!count(array_intersect($scope, $this->decoded->scope));
+        $this->token = $token;
     }
 }
