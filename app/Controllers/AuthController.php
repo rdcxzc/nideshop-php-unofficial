@@ -25,7 +25,6 @@ class AuthController extends Controller
         $fullUserInfo = $params['userInfo'];
         $userInfo = $fullUserInfo['userInfo'];
         $clientIp = '';
-        //print_r($userInfo);
 
         $wxResult = $this->getUserinfo($code);
         if(!isset($wxResult['openid'])){
@@ -61,7 +60,7 @@ class AuthController extends Controller
                     'mobile' => '',
                     'weixin_openid'=> $wxResult['openid'],
                     'avatar' =>  (!empty($userInfo['avatarUrl'])) ? $userInfo['avatarUrl'] : '',
-                    'gender' =>  (!empty($userInfo['gender'])) ? $userInfo['gender'] : '0', // 性别 0：未知、1：男、2：女
+                    'gender' =>  (!empty($userInfo['gender'])) ? $userInfo['gender'] : 0, // 性别 0：未知、1：男、2：女
                     'nickname'=> $userInfo['nickName']
                 ];
                 $userModel->addUser($insertUser);
