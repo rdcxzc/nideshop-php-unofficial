@@ -75,7 +75,8 @@ $container['errorHandler'] = function ($container) {
             $code = $exception->getCode();
             $message = $exception->getMessage();
         }
-        if ($code == 0) {
+//        echo $code;
+        if (in_array($code,['0','2002'])) {
             $code = 500;
         }
         return $container['response']
