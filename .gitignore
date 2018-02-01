@@ -4,3 +4,8 @@
 composer.lock
 /tests/
 /.idea/
+.idea
+tests
+/runtime/README.md
+/runtime/app.log
+/LICENSE
