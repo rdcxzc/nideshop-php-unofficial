@@ -30,6 +30,9 @@ require __DIR__ . '/../app/config/middleware.php';
 // Register routes
 require __DIR__ . '/../app/config/routes.php';
 
+// Register functions
+require __DIR__ . '/../app/Third/functions.php';
+
 // Run app
 $app->run();
 

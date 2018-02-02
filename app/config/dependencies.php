@@ -76,14 +76,15 @@ $container['errorHandler'] = function ($container) {
             $message = $exception->getMessage();
         }
 //        echo $code;
-        if (in_array($code,['0','2002'])) {
+        if (in_array($code,['0','2002','10501'])) {
+            $o_code = $code;
             $code = 500;
         }
         return $container['response']
             ->withStatus($code)
             ->withHeader('Content-Type', 'application/json')
             ->write(json_encode([
-                    'errno' => $code,
+                    'errno' => $o_code,
                     'errmsg' => $message,
                     'success' => false])
             );
