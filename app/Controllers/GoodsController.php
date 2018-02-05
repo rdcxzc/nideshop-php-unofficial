@@ -115,7 +115,7 @@ class GoodsController extends Controller
             $parentCategory = $categoryModel->field('id,name')->order('sort_order asc')->where('id','in',inToStr($parentIds))->select()->toArray();
 
             if(!empty($parentCategory)){
-                $parentCategory = array_merge($filterCategory,$parentCategory);
+                $filterCategory = array_merge($filterCategory,$parentCategory);
             }
         }
 
@@ -136,19 +136,16 @@ class GoodsController extends Controller
             'data'   => $goodsDataOrgin
         ];
 
+        $gData = [];
+        foreach($filterCategory as $k => $v){
+            $v['checked'] = (empty($cid) && $v['id'] === 0 || $v['id'] === intval($cid));
+            $gData[] = $v;
 
-        $goodsData['filterCategory'] = function() use($goodsData){
-            foreach($goodsData as $k => $v){
-                print_r($v);
-            }
-        };
+        }
+        $goodsData['filterCategory'] = $gData;
+        $goodsData['goodsList'] = $goodsData['data'];
 
-
-
-
-
-
-
+        return $this->api_r(0,'',200,$goodsData,$response);
     }
 
     public function detail(Request $request, Response $response)
