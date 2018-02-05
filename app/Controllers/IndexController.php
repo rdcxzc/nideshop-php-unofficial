@@ -51,9 +51,11 @@ class IndexController extends Controller
             // 主分类 ID
             $categoryIds[] = $value['id'];
         }
-        $categoryIds = inToStr($categoryIds);
+        //$categoryIds = inToStr($categoryIds);
+        $map['parent_id'] = ['in',$categoryIds];
+        $where = getWhereString($map);
 
-        $childCategory = $categoryModel->where('parent_id', 'in', $categoryIds)->field('parent_id,id')->order('id asc')->select()->toArray();
+        $childCategory = $categoryModel->where($where)->field('parent_id,id')->order('id asc')->select()->toArray();
 
         foreach ($categoryList as $ckey => $cvalue) {
             foreach ($childCategory as $key => $value) {

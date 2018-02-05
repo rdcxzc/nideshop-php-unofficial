@@ -7,7 +7,7 @@
  */
 
 use App\Service\Token;
-
+use Firebase\JWT\JWT;
 /**
  * 数组转String
  * @param array $data
@@ -23,8 +23,21 @@ function inToStr(array $data)
     return $query;
 }
 
-function getUserId()
+function getUserId($jwt)
 {
-    $base_token = Token::getUserId();
-    return $base_token;
+    $decoded = JWT::decode($jwt[0], getenv('JWT_SECRET'), array('HS256'));
+    if(is_array($decoded)){
+        return $decoded['user_id'];
+    }elseif(is_object($decoded)){
+        return $decoded->user_id;
+    }
+}
+
+// model
+function getWhereString($data)
+{
+    $qf = new \App\Third\QueryFormat();
+    $res = $qf->parseWhere($data);
+    return $res;
+
 }

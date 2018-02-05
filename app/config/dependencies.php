@@ -20,6 +20,7 @@ $container["JwtAuthentication"] = function ($container) {
     return new JwtAuthentication([
         "path" => ["/api/order", "/api/auth", "/api/collect", "/api/cart", "/api/pay", "/api/comment/post", "/api/address"],
         "header" => "X-Nideshop-Token",
+        "attribute" => "jwt",
         "regexp" => "/(.*)/",
         "passthrough" => ["/api/auth/loginByWeixin"],
         "secret" => getenv("JWT_SECRET"),
@@ -28,6 +29,7 @@ $container["JwtAuthentication"] = function ($container) {
             return new UnauthorizedResponse($arguments["message"], 401);
         },
         "callback" => function ($request, $response, $arguments) use ($container) {
+            //file_put_contents('ssssss.json', json_encode($arguments));
             $container["jwt"]->populate($arguments["decoded"]);
             $token = isset($_SERVER['HTTP_X_NIDESHOP_TOKEN']) ? $_SERVER['HTTP_X_NIDESHOP_TOKEN'] : '';
             $container["jwt"]->putToken($token);
@@ -76,7 +78,7 @@ $container['errorHandler'] = function ($container) {
             $message = $exception->getMessage();
         }
 //        echo $code;
-        if (in_array($code,['0','2002','10501'])) {
+        if (in_array($code, ['0', '2002', '10501'])) {
             $o_code = $code;
             $code = 500;
         }

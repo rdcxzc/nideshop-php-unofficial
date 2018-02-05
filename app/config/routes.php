@@ -70,7 +70,6 @@ $app->group('/api', function () {
     $this->get('/catalog/current', '\App\Controllers\CategoryController:current');
     // 微信登录授权
     $this->post('/auth/loginByWeixin', '\App\Controllers\AuthController:loginByWeixin');
-    $this->get('/auth/getuserinfo','\App\Controllers\AuthController:getUserInfo');
     // 商品
     $this->get('/goods/count', '\App\Controllers\GoodsController:count');  //统计商品总数
     $this->get('/goods/list', '\App\Controllers\GoodsController:getList');  //获得商品列表

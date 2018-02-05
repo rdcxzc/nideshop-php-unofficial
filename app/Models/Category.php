@@ -13,5 +13,17 @@ use think\Model;
 
 class Category extends Model
 {
+    public function getChildCategoryId($parentId)
+    {
+        $childIds = $this->where(['parent_id' => $parentId])->limit(10000)->column('id');
+        return $childIds;
+    }
+
+    public function getCategoryWhereIn($categoryId)
+    {
+        $childIds = $this->getChildCategoryId($categoryId);
+        $childIds[] = $categoryId;
+        return $childIds;
+    }
 
 }

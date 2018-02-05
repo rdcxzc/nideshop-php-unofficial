@@ -33,6 +33,10 @@ require __DIR__ . '/../app/config/routes.php';
 // Register functions
 require __DIR__ . '/../app/Third/functions.php';
 
+// Register Core Handle
+require __DIR__ . '/../app/Third/Core.php';
+
+//、、set_error_handler('handle');
 // Run app
 $app->run();
 
