@@ -75,9 +75,9 @@ $app->group('/api', function () {
     $this->get('/goods/list', '\App\Controllers\GoodsController:getList');  //获得商品列表
     $this->get('/goods/category', '\App\Controllers\GoodsController:category');  //获得分类数据
     $this->get('/goods/detail', '\App\Controllers\GoodsController:detail');  //获得商品的详情
-    $this->get('/goods/new', '\App\Controllers\GoodsController:new');  //新品
-    $this->get('/goods/hot', '\App\Controllers\GoodsController:hot');  //热门
-    $this->get('/goods/related', '\App\Controllers\GoodsController:related');  //商品详情页的关联商品（大家都在看）
+    $this->get('/goods/new', '\App\Controllers\GoodsController:newGoods');  //新品
+    $this->get('/goods/hot', '\App\Controllers\GoodsController:hotGoods');  //热门
+    $this->get('/goods/related', '\App\Controllers\GoodsController:relatedGoods');  //商品详情页的关联商品（大家都在看）
     // 品牌
     $this->get('/brand/list', '\App\Controllers\BrandController:getList');  //品牌列表
     $this->get('/brand/detail', '\App\Controllers\BrandController:detail'); //品牌详情

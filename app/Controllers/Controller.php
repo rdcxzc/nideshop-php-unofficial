@@ -16,11 +16,11 @@ class Controller
 {
     protected $container;
     private $response;
+    protected $decoded;
 
     public function __construct($container)
     {
         $this->container = $container;
-        $this->response = Response::class;
     }
 
     public function __get($property)

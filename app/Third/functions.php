@@ -25,12 +25,15 @@ function inToStr(array $data)
 
 function getUserId($jwt)
 {
-    $decoded = JWT::decode($jwt[0], getenv('JWT_SECRET'), array('HS256'));
-    if(is_array($decoded)){
-        return $decoded['user_id'];
-    }elseif(is_object($decoded)){
-        return $decoded->user_id;
+    if(!empty($jwt)) {
+        $decoded = JWT::decode($jwt[0], getenv('JWT_SECRET'), array('HS256'));
+        if (is_array($decoded)) {
+            return $decoded['user_id'];
+        } elseif (is_object($decoded)) {
+            return $decoded->user_id;
+        }
     }
+    return false;
 }
 
 // model
