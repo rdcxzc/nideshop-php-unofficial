@@ -9,7 +9,7 @@
 namespace App\Controllers;
 
 
-class SearchController
+class SearchController extends Controller
 {
 
 }
