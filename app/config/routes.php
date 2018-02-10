@@ -98,7 +98,7 @@ $app->group('/api', function () {
     // 评论
     $this->get('/comment/list', '\App\Controllers\CommentController:getList');  //评论列表
     $this->get('/comment/count', '\App\Controllers\CommentController:count');  //评论总数
-    $this->get('/comment/post', '\App\Controllers\CommentController:post');  //发表评论
+    $this->post('/comment/post', '\App\Controllers\CommentController:post');  //发表评论
     // 专题
     $this->get('/topic/list', '\App\Controllers\TopicController:getList'); //专题列表
     $this->get('/topic/detail', '\App\Controllers\TopicController:detail'); //专题详情
