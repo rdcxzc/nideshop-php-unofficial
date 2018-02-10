@@ -21,7 +21,6 @@ class RegionController extends Controller
         $regionModel = new Region();
         $regionList = $regionModel->getRegionList($parentId);
         return $this->api_r(0,'',200,$regionList,$response);
-
     }
 
 }

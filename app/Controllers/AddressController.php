@@ -9,7 +9,7 @@
 namespace App\Controllers;
 
 
-class AddressController
+class AddressController extends Controller
 {
 
 }
