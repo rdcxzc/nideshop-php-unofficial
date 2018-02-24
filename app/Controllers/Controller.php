@@ -17,10 +17,14 @@ class Controller
     protected $container;
     private $response;
     protected $decoded;
+    private $token;
+    protected $userid;
 
     public function __construct($container)
     {
         $this->container = $container;
+        $this->token = isset($_SERVER['HTTP_X_NIDESHOP_TOKEN']) ? $_SERVER['HTTP_X_NIDESHOP_TOKEN'] : FALSE;
+        $this->userid = getUserId($this->token);
     }
 
     public function __get($property)
